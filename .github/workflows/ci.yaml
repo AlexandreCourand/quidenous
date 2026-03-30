@@ -119,6 +119,6 @@ jobs:
           script: |
             export KUBECONFIG=/home/opencode/.kube/config
             kubectl apply -f /tmp/quidenous-deploy/k8s/deployment.yaml
-            kubectl set image deployment/quidenous quidenous=${{ env.HARBOR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }} -n default
+            kubectl rollout restart deployment/quidenous -n default
             kubectl rollout status deployment/quidenous -n default --timeout=120s
             rm -rf /tmp/quidenous-deploy
