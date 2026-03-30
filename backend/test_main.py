@@ -1,4 +1,6 @@
-from main import app
+from main import app, QUESTIONS
+
+TOTAL = len(QUESTIONS)
 
 
 def test_random_question():
@@ -11,7 +13,7 @@ def test_random_question():
     assert "question" in data
     assert "remaining" in data
     assert "total" in data
-    assert data["total"] == 30
+    assert data["total"] == TOTAL
 
 
 def test_no_duplicate_until_exhausted():
@@ -20,11 +22,11 @@ def test_no_duplicate_until_exhausted():
     client = TestClient(app)
     client.get("/api/question/reset")
     seen = set()
-    for _ in range(30):
+    for _ in range(TOTAL):
         response = client.get("/api/question/random")
         data = response.json()
         seen.add(data["question"])
-    assert len(seen) == 30
+    assert len(seen) == TOTAL
 
 
 def test_reset():
