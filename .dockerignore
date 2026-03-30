@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+node_modules/
+.git/
+.github/
+k8s/
+*.md
+.gitignore
+.dockerignore
